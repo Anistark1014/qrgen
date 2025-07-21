@@ -288,273 +288,283 @@ END:VCARD`,
       </Card>
 
       {/* Customization Section */}
-      <Card className="bg-card/50 backdrop-blur-sm border-border/50">
-        <CardHeader>
-          <CardTitle className="flex items-center space-x-2">
-            <Palette className="h-5 w-5" />
-            <span>Styling & Customization</span>
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          <Tabs defaultValue="colors" className="w-full">
-            <TabsList className="grid w-full grid-cols-4">
-              <TabsTrigger value="colors">Colors</TabsTrigger>
-              <TabsTrigger value="style">Style</TabsTrigger>
-              <TabsTrigger value="logo">Logo</TabsTrigger>
-              <TabsTrigger value="settings">Settings</TabsTrigger>
-            </TabsList>
-            
-            <TabsContent value="colors" className="space-y-4 mt-4">
-              <div className="flex items-center space-x-2">
-                <Switch
-                  checked={config.useGradient}
-                  onCheckedChange={(checked) => onConfigChange({ ...config, useGradient: checked })}
-                />
-                <Label>Use Gradient</Label>
-              </div>
+<Card className="bg-card/50 backdrop-blur-sm border-border/50">
+  <CardHeader>
+    <CardTitle className="flex items-center space-x-2">
+      <Palette className="h-5 w-5" />
+      <span>Styling & Customization</span>
+    </CardTitle>
+  </CardHeader>
+  <CardContent>
+    <div className="space-y-6 mt-2">
+      {/* Colors */}
+      <div className="space-y-4">
+        <div className="flex items-center space-x-2">
+          <Switch
+            checked={config.useGradient}
+            onCheckedChange={(checked) => onConfigChange({ ...config, useGradient: checked })}
+          />
+          <Label>Use Gradient</Label>
+        </div>
 
-              {config.useGradient ? (
-                <div className="space-y-3">
-                  <div>
-                    <Label>Gradient Type</Label>
-                    <Select
-                      value={config.gradientType}
-                      onValueChange={(value: "linear" | "radial") => 
-                        onConfigChange({ ...config, gradientType: value })
-                      }
-                    >
-                      <SelectTrigger>
-                        <SelectValue />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="linear">Linear</SelectItem>
-                        <SelectItem value="radial">Radial</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
-                  <div className="grid grid-cols-2 gap-3">
-                    <div>
-                      <Label>Start Color</Label>
-                      <Input
-                        type="color"
-                        value={config.gradientColors[0]}
-                        onChange={(e) => onConfigChange({
-                          ...config,
-                          gradientColors: [e.target.value, config.gradientColors[1]]
-                        })}
-                      />
-                    </div>
-                    <div>
-                      <Label>End Color</Label>
-                      <Input
-                        type="color"
-                        value={config.gradientColors[1]}
-                        onChange={(e) => onConfigChange({
-                          ...config,
-                          gradientColors: [config.gradientColors[0], e.target.value]
-                        })}
-                      />
-                    </div>
-                  </div>
-                </div>
-              ) : (
-                <div>
-                  <Label>Foreground Color</Label>
-                  <Input
-                    type="color"
-                    value={config.foregroundColor}
-                    onChange={(e) => onConfigChange({ ...config, foregroundColor: e.target.value })}
-                  />
-                </div>
-              )}
-
-              <div className="flex items-center space-x-2">
-                <Switch
-                  checked={config.transparentBackground}
-                  onCheckedChange={(checked) => onConfigChange({ ...config, transparentBackground: checked })}
-                />
-                <Label>Transparent Background</Label>
-              </div>
-
-              {!config.transparentBackground && (
-                <div>
-                  <Label>Background Color</Label>
-                  <Input
-                    type="color"
-                    value={config.backgroundColor}
-                    onChange={(e) => onConfigChange({ ...config, backgroundColor: e.target.value })}
-                  />
-                </div>
-              )}
-            </TabsContent>
-            
-            <TabsContent value="style" className="space-y-4 mt-4">
+        {config.useGradient ? (
+          <div className="space-y-3">
+            <div>
+              <Label>Gradient Type</Label>
+              <Select
+                value={config.gradientType}
+                onValueChange={(value: "linear" | "radial") =>
+                  onConfigChange({ ...config, gradientType: value })
+                }
+              >
+                <SelectTrigger>
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="linear">Linear</SelectItem>
+                  <SelectItem value="radial">Radial</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+            <div className="grid grid-cols-2 gap-3">
               <div>
-                <Label>Dot Style</Label>
-                <Select
-                  value={config.dotStyle}
-                  onValueChange={(value: "square" | "circle" | "rounded") => 
-                    onConfigChange({ ...config, dotStyle: value })
-                  }
-                >
-                  <SelectTrigger>
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="square">Square</SelectItem>
-                    <SelectItem value="circle">Circle</SelectItem>
-                    <SelectItem value="rounded">Rounded</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-
-              <div>
-                <Label>Eye Style</Label>
-                <Select
-                  value={config.eyeStyle}
-                  onValueChange={(value: "square" | "circle" | "rounded") => 
-                    onConfigChange({ ...config, eyeStyle: value })
-                  }
-                >
-                  <SelectTrigger>
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="square">Square</SelectItem>
-                    <SelectItem value="circle">Circle</SelectItem>
-                    <SelectItem value="rounded">Rounded</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-
-              <div>
-                <Label>Corner Radius: {config.cornerRadius}px</Label>
-                <Slider
-                  value={[config.cornerRadius]}
-                  onValueChange={([value]) => onConfigChange({ ...config, cornerRadius: value })}
-                  min={0}
-                  max={20}
-                  step={1}
-                  className="mt-2"
-                />
-              </div>
-
-              <div>
-                <Label>Margin: {config.margin}px</Label>
-                <Slider
-                  value={[config.margin]}
-                  onValueChange={([value]) => onConfigChange({ ...config, margin: value })}
-                  min={0}
-                  max={10}
-                  step={1}
-                  className="mt-2"
-                />
-              </div>
-            </TabsContent>
-            
-            <TabsContent value="logo" className="space-y-4 mt-4">
-              <div>
-                <Label htmlFor="logo-upload">Upload Logo (PNG/JPEG)</Label>
-                <div className="mt-1">
-                  <Button variant="outline" asChild>
-                    <label htmlFor="logo-upload" className="cursor-pointer">
-                      <Upload className="h-4 w-4 mr-2" />
-                      Choose File
-                    </label>
-                  </Button>
-                  <input
-                    id="logo-upload"
-                    type="file"
-                    accept="image/png,image/jpeg"
-                    onChange={handleLogoUpload}
-                    className="hidden"
-                  />
-                </div>
-                {config.logo && (
-                  <p className="text-sm text-muted-foreground mt-1">
-                    Selected: {config.logo.name}
-                  </p>
-                )}
-              </div>
-
-              {config.logo && (
-                <div>
-                  <Label>Logo Size: {config.logoSize}%</Label>
-                  <Slider
-                    value={[config.logoSize]}
-                    onValueChange={([value]) => onConfigChange({ ...config, logoSize: value })}
-                    min={10}
-                    max={50}
-                    step={1}
-                    className="mt-2"
-                  />
-                </div>
-              )}
-
-              <div>
-                <Label htmlFor="label">Label Text (Optional)</Label>
+                <Label>Start Color</Label>
                 <Input
-                  id="label"
-                  value={config.label}
-                  onChange={(e) => onConfigChange({ ...config, label: e.target.value })}
-                  placeholder="Add a label below the QR code"
-                />
-              </div>
-            </TabsContent>
-            
-            <TabsContent value="settings" className="space-y-4 mt-4">
-              <div>
-                <Label>QR Style</Label>
-                <Select
-                  value={config.style}
-                  onValueChange={(value: QRStyle) => onConfigChange({ ...config, style: value })}
-                >
-                  <SelectTrigger>
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="square">Square</SelectItem>
-                    <SelectItem value="dots">Dots</SelectItem>
-                    <SelectItem value="rounded">Rounded</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-
-              <div>
-                <Label>Error Correction Level</Label>
-                <Select
-                  value={config.errorCorrectionLevel}
-                  onValueChange={(value: "L" | "M" | "Q" | "H") => 
-                    onConfigChange({ ...config, errorCorrectionLevel: value })
+                  type="color"
+                  value={config.gradientColors[0]}
+                  onChange={(e) =>
+                    onConfigChange({
+                      ...config,
+                      gradientColors: [e.target.value, config.gradientColors[1]],
+                    })
                   }
-                >
-                  <SelectTrigger>
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="L">Low (7%)</SelectItem>
-                    <SelectItem value="M">Medium (15%)</SelectItem>
-                    <SelectItem value="Q">Quartile (25%)</SelectItem>
-                    <SelectItem value="H">High (30%)</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-
-              <div>
-                <Label>Export Size: {config.size}px</Label>
-                <Slider
-                  value={[config.size]}
-                  onValueChange={([value]) => onConfigChange({ ...config, size: value })}
-                  min={256}
-                  max={4096}
-                  step={256}
-                  className="mt-2"
                 />
               </div>
-            </TabsContent>
-          </Tabs>
-        </CardContent>
-      </Card>
+              <div>
+                <Label>End Color</Label>
+                <Input
+                  type="color"
+                  value={config.gradientColors[1]}
+                  onChange={(e) =>
+                    onConfigChange({
+                      ...config,
+                      gradientColors: [config.gradientColors[0], e.target.value],
+                    })
+                  }
+                />
+              </div>
+            </div>
+          </div>
+        ) : (
+          <div>
+            <Label>Foreground Color</Label>
+            <Input
+              type="color"
+              value={config.foregroundColor}
+              onChange={(e) => onConfigChange({ ...config, foregroundColor: e.target.value })}
+            />
+          </div>
+        )}
+
+        <div className="flex items-center space-x-2">
+          <Switch
+            checked={config.transparentBackground}
+            onCheckedChange={(checked) =>
+              onConfigChange({ ...config, transparentBackground: checked })
+            }
+          />
+          <Label>Transparent Background</Label>
+        </div>
+
+        {!config.transparentBackground && (
+          <div>
+            <Label>Background Color</Label>
+            <Input
+              type="color"
+              value={config.backgroundColor}
+              onChange={(e) =>
+                onConfigChange({ ...config, backgroundColor: e.target.value })
+              }
+            />
+          </div>
+        )}
+      </div>
+
+      {/* Style */}
+      <div className="space-y-4">
+        <div>
+          <Label>Dot Style</Label>
+          <Select
+            value={config.dotStyle}
+            onValueChange={(value: "square" | "circle" | "rounded") =>
+              onConfigChange({ ...config, dotStyle: value })
+            }
+          >
+            <SelectTrigger>
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="square">Square</SelectItem>
+              <SelectItem value="circle">Circle</SelectItem>
+              <SelectItem value="rounded">Rounded</SelectItem>
+            </SelectContent>
+          </Select>
+        </div>
+
+        <div>
+          <Label>Eye Style</Label>
+          <Select
+            value={config.eyeStyle}
+            onValueChange={(value: "square" | "circle" | "rounded") =>
+              onConfigChange({ ...config, eyeStyle: value })
+            }
+          >
+            <SelectTrigger>
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="square">Square</SelectItem>
+              <SelectItem value="circle">Circle</SelectItem>
+              <SelectItem value="rounded">Rounded</SelectItem>
+            </SelectContent>
+          </Select>
+        </div>
+
+        <div>
+          <Label>Corner Radius: {config.cornerRadius}px</Label>
+          <Slider
+            value={[config.cornerRadius]}
+            onValueChange={([value]) =>
+              onConfigChange({ ...config, cornerRadius: value })
+            }
+            min={0}
+            max={20}
+            step={1}
+            className="mt-2"
+          />
+        </div>
+
+        <div>
+          <Label>Margin: {config.margin}px</Label>
+          <Slider
+            value={[config.margin]}
+            onValueChange={([value]) =>
+              onConfigChange({ ...config, margin: value })
+            }
+            min={0}
+            max={10}
+            step={1}
+            className="mt-2"
+          />
+        </div>
+      </div>
+
+      {/* Logo */}
+      <div className="space-y-4">
+        <div>
+          <Label htmlFor="logo-upload">Upload Logo (PNG/JPEG)</Label>
+          <div className="mt-1">
+            <Button variant="outline" asChild>
+              <label htmlFor="logo-upload" className="cursor-pointer">
+                <Upload className="h-4 w-4 mr-2" />
+                Choose File
+              </label>
+            </Button>
+            <input
+              id="logo-upload"
+              type="file"
+              accept="image/png,image/jpeg"
+              onChange={handleLogoUpload}
+              className="hidden"
+            />
+          </div>
+          {config.logo && (
+            <p className="text-sm text-muted-foreground mt-1">
+              Selected: {config.logo.name}
+            </p>
+          )}
+        </div>
+
+        {config.logo && (
+          <div>
+            <Label>Logo Size: {config.logoSize}%</Label>
+            <Slider
+              value={[config.logoSize]}
+              onValueChange={([value]) => onConfigChange({ ...config, logoSize: value })}
+              min={10}
+              max={50}
+              step={1}
+              className="mt-2"
+            />
+          </div>
+        )}
+
+        <div>
+          <Label htmlFor="label">Label Text (Optional)</Label>
+          <Input
+            id="label"
+            value={config.label}
+            onChange={(e) => onConfigChange({ ...config, label: e.target.value })}
+            placeholder="Add a label below the QR code"
+          />
+        </div>
+      </div>
+
+      {/* Settings */}
+      <div className="space-y-4">
+        <div>
+          <Label>QR Style</Label>
+          <Select
+            value={config.style}
+            onValueChange={(value: QRStyle) => onConfigChange({ ...config, style: value })}
+          >
+            <SelectTrigger>
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="square">Square</SelectItem>
+              <SelectItem value="dots">Dots</SelectItem>
+              <SelectItem value="rounded">Rounded</SelectItem>
+            </SelectContent>
+          </Select>
+        </div>
+
+        <div>
+          <Label>Error Correction Level</Label>
+          <Select
+            value={config.errorCorrectionLevel}
+            onValueChange={(value: "L" | "M" | "Q" | "H") =>
+              onConfigChange({ ...config, errorCorrectionLevel: value })
+            }
+          >
+            <SelectTrigger>
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="L">Low (7%)</SelectItem>
+              <SelectItem value="M">Medium (15%)</SelectItem>
+              <SelectItem value="Q">Quartile (25%)</SelectItem>
+              <SelectItem value="H">High (30%)</SelectItem>
+            </SelectContent>
+          </Select>
+        </div>
+
+        <div>
+          <Label>Export Size: {config.size}px</Label>
+          <Slider
+            value={[config.size]}
+            onValueChange={([value]) => onConfigChange({ ...config, size: value })}
+            min={256}
+            max={4096}
+            step={256}
+            className="mt-2"
+          />
+        </div>
+      </div>
+    </div>
+  </CardContent>
+</Card>
+
     </div>
   );
 };
