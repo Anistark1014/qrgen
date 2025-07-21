@@ -121,23 +121,40 @@ export const PreviewPanel = ({
           {/* Preview Actions */}
           {qrDataUrl && (
             <div className="flex flex-wrap gap-2 justify-center">
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={handleCopyToClipboard}
-                disabled={isCopying}
-                className="hover:bg-accent/10"
-              >
-                {isCopying ? (
-                  <Loader2 className="h-4 w-4 mr-2 animate-spin" />
-                ) : (
-                  <Copy className="h-4 w-4 mr-2" />
-                )}
-                Copy to Clipboard
-              </Button>
-
+              {typeof window !== "undefined" && /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent) ? (
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => {
+                    const link = document.createElement("a");
+                    link.href = qrDataUrl;
+                    link.download = "qr-code.png";
+                    link.click();
+                  }}
+                  className="hover:bg-accent/10"
+                >
+                  <Save className="h-4 w-4 mr-2" />
+                  Download QR
+                </Button>
+              ) : (
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={handleCopyToClipboard}
+                  disabled={isCopying}
+                  className="hover:bg-accent/10"
+                >
+                  {isCopying ? (
+                    <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                  ) : (
+                    <Copy className="h-4 w-4 mr-2" />
+                  )}
+                  Copy to Clipboard
+                </Button>
+              )}
             </div>
           )}
+
 
           {/* QR Code Info */}
           {config.data && (

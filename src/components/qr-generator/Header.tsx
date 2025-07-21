@@ -37,13 +37,7 @@ export const Header = ({ darkMode, onToggleDarkMode }: HeaderProps) => {
           )}
         </Button>
         
-        <div className="text-sm text-muted-foreground">
-          <kbd className="px-2 py-1 bg-muted/30 rounded text-xs">Ctrl+Enter</kbd>
-          <span className="ml-1">Generate</span>
-          <span className="mx-2">•</span>
-          <kbd className="px-2 py-1 bg-muted/30 rounded text-xs">Ctrl+D</kbd>
-          <span className="ml-1">Download</span>
-        </div>
+
       </div>
     </header>
   );

@@ -1,9 +1,10 @@
 #root {
-  max-width: 1280px;
+  max-width: 100%;
+  padding: 1rem;
   margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+  @apply sm:p-4 md:p-6 lg:p-8 xl:px-20 text-center;
 }
+
 
 .logo {
   height: 6em;

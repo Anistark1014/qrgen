@@ -3,7 +3,7 @@ import { Header } from "./qr-generator/Header";
 import { InputPanel } from "./qr-generator/InputPanel";
 import { PreviewPanel } from "./qr-generator/PreviewPanel";
 import { ExportPanel } from "./qr-generator/ExportPanel";
-import { HistoryPanel } from "./qr-generator/HistoryPanel";
+// import { HistoryPanel } from "./qr-generator/HistoryPanel";
 import { QRConfig, QRInputType, QRStyle, ExportFormat } from "@/types/qr-types";
 import { generateQRCode } from "@/lib/qr-generator";
 import { saveToHistory, getHistory, clearHistory } from "@/lib/storage";
@@ -139,41 +139,41 @@ export const QRGeneratorApp = () => {
   };
 
   return (
-    <div className="min-h-screen bg-surface-gradient text-foreground">
-      <div className="container mx-auto px-4 py-6">
-        <Header darkMode={darkMode} onToggleDarkMode={setDarkMode} />
-        
-        <div className="grid lg:grid-cols-2 gap-8 mt-8">
-          {/* Left Panel - Input & Customization */}
-          <div className="space-y-6">
-            <InputPanel config={config} onConfigChange={setConfig} />
-          </div>
+  <div className="min-h-screen bg-surface-gradient text-foreground">
+    <div className="w-full px-4 sm:px-6 lg:px-12 py-6 max-w-screen-xl mx-auto">
+      <Header darkMode={darkMode} onToggleDarkMode={setDarkMode} />
 
-          {/* Right Panel - Preview & Export */}
-          <div className="space-y-6">
-            <PreviewPanel 
-              config={config}
-              qrDataUrl={qrDataUrl}
-              isGenerating={isGenerating}
-              onSaveToHistory={handleSaveToHistory}
-            />
-            
-            <ExportPanel 
-              qrDataUrl={qrDataUrl}
-              config={config}
-              onExport={(format) => {
-                toast({
-                  title: "Export Started",
-                  description: `Exporting as ${format.toUpperCase()}...`,
-                });
-              }}
-            />
-          </div>
+      <div className="mt-8 grid grid-cols-1 gap-10 lg:grid-cols-2">
+        {/* Left Panel - Input & Customization */}
+        <div className="space-y-6">
+          <InputPanel config={config} onConfigChange={setConfig} />
         </div>
 
+        {/* Right Panel - Preview & Export */}
+        <div className="space-y-6">
+          <PreviewPanel 
+            config={config}
+            qrDataUrl={qrDataUrl}
+            isGenerating={isGenerating}
+            onSaveToHistory={handleSaveToHistory}
+          />
 
-
+          <ExportPanel 
+            qrDataUrl={qrDataUrl}
+            config={config}
+            onExport={(format) => {
+              toast({
+                title: "Export Started",
+                description: `Exporting as ${format.toUpperCase()}...`,
+              });
+            }}
+          />
+        </div>
       </div>
     </div>
-  );
+  </div>
+);
+
+
+
 };
