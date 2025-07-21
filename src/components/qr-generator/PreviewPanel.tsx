@@ -135,16 +135,7 @@ export const PreviewPanel = ({
                 )}
                 Copy to Clipboard
               </Button>
-              
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={onSaveToHistory}
-                className="hover:bg-accent/10"
-              >
-                <Save className="h-4 w-4 mr-2" />
-                Save to History
-              </Button>
+
             </div>
           )}
 
