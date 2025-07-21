@@ -171,14 +171,8 @@ export const QRGeneratorApp = () => {
           </div>
         </div>
 
-        {/* History Panel */}
-        <div className="mt-8">
-          <HistoryPanel
-            history={history}
-            onLoadFromHistory={handleLoadFromHistory}
-            onClearHistory={handleClearHistory}
-          />
-        </div>
+
+
       </div>
     </div>
   );
