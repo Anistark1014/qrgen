@@ -11,9 +11,10 @@ import { useToast } from "@/hooks/use-toast";
 
 export const QRGeneratorApp = () => {
   const { toast } = useToast();
-  const [darkMode, setDarkMode] = useState(() => {
-    return localStorage.getItem("qr-generator-dark-mode") === "true";
-  });
+  const [darkMode, setDarkMode] = useState<boolean>(() => {
+  const stored = localStorage.getItem("qr-generator-dark-mode");
+  return stored === null ? true : stored === "true";
+});
   
   const [config, setConfig] = useState<QRConfig>({
     inputType: "url",

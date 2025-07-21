@@ -389,76 +389,6 @@ END:VCARD`,
           </div>
         )}
       </div>
-
-      {/* Style */}
-      <div className="space-y-4">
-        <div>
-          <Label>Dot Style</Label>
-          <Select
-            value={config.dotStyle}
-            onValueChange={(value: "square" | "circle" | "rounded") =>
-              onConfigChange({ ...config, dotStyle: value })
-            }
-          >
-            <SelectTrigger>
-              <SelectValue />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="square">Square</SelectItem>
-              <SelectItem value="circle">Circle</SelectItem>
-              <SelectItem value="rounded">Rounded</SelectItem>
-            </SelectContent>
-          </Select>
-        </div>
-
-        <div>
-          <Label>Eye Style</Label>
-          <Select
-            value={config.eyeStyle}
-            onValueChange={(value: "square" | "circle" | "rounded") =>
-              onConfigChange({ ...config, eyeStyle: value })
-            }
-          >
-            <SelectTrigger>
-              <SelectValue />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="square">Square</SelectItem>
-              <SelectItem value="circle">Circle</SelectItem>
-              <SelectItem value="rounded">Rounded</SelectItem>
-            </SelectContent>
-          </Select>
-        </div>
-
-        <div>
-          <Label>Corner Radius: {config.cornerRadius}px</Label>
-          <Slider
-            value={[config.cornerRadius]}
-            onValueChange={([value]) =>
-              onConfigChange({ ...config, cornerRadius: value })
-            }
-            min={0}
-            max={20}
-            step={1}
-            className="mt-2"
-          />
-        </div>
-
-        <div>
-          <Label>Margin: {config.margin}px</Label>
-          <Slider
-            value={[config.margin]}
-            onValueChange={([value]) =>
-              onConfigChange({ ...config, margin: value })
-            }
-            min={0}
-            max={10}
-            step={1}
-            className="mt-2"
-          />
-        </div>
-      </div>
-
       {/* Logo */}
       <div className="space-y-4">
         <div>
@@ -512,23 +442,6 @@ END:VCARD`,
 
       {/* Settings */}
       <div className="space-y-4">
-        <div>
-          <Label>QR Style</Label>
-          <Select
-            value={config.style}
-            onValueChange={(value: QRStyle) => onConfigChange({ ...config, style: value })}
-          >
-            <SelectTrigger>
-              <SelectValue />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="square">Square</SelectItem>
-              <SelectItem value="dots">Dots</SelectItem>
-              <SelectItem value="rounded">Rounded</SelectItem>
-            </SelectContent>
-          </Select>
-        </div>
-
         <div>
           <Label>Error Correction Level</Label>
           <Select
