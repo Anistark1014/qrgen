@@ -75,6 +75,17 @@ END:VCARD`;
     });
   };
 
+  const handleDataChange = (value: string) => {
+    let processedValue = value;
+    
+    // Auto-add https:// for URLs
+    if (config.inputType === "url" && value && !value.match(/^https?:\/\//)) {
+      processedValue = `https://${value}`;
+    }
+    
+    onConfigChange({ ...config, data: processedValue });
+  };
+
   const updateWiFiConfig = (updates: Partial<WiFiConfig>) => {
     const newConfig = { ...wifiConfig, ...updates };
     setWifiConfig(newConfig);
@@ -250,7 +261,7 @@ END:VCARD`,
                 <Textarea
                   id="qr-data"
                   value={config.data}
-                  onChange={(e) => onConfigChange({ ...config, data: e.target.value })}
+                  onChange={(e) => handleDataChange(e.target.value)}
                   placeholder={
                     config.inputType === "text" 
                       ? "Enter your text content here..." 
@@ -262,9 +273,9 @@ END:VCARD`,
                 <Input
                   id="qr-data"
                   value={config.data}
-                  onChange={(e) => onConfigChange({ ...config, data: e.target.value })}
+                  onChange={(e) => handleDataChange(e.target.value)}
                   placeholder={
-                    config.inputType === "url" ? "https://example.com" :
+                    config.inputType === "url" ? "example.com" :
                     config.inputType === "email" ? "example@email.com" :
                     config.inputType === "phone" ? "+1 (555) 123-4567" :
                     "Enter content..."
@@ -288,8 +299,9 @@ END:VCARD`,
         </CardHeader>
         <CardContent>
           <Tabs defaultValue="colors" className="w-full">
-            <TabsList className="grid w-full grid-cols-3">
+            <TabsList className="grid w-full grid-cols-4">
               <TabsTrigger value="colors">Colors</TabsTrigger>
+              <TabsTrigger value="style">Style</TabsTrigger>
               <TabsTrigger value="logo">Logo</TabsTrigger>
               <TabsTrigger value="settings">Settings</TabsTrigger>
             </TabsList>
@@ -376,6 +388,70 @@ END:VCARD`,
                   />
                 </div>
               )}
+            </TabsContent>
+            
+            <TabsContent value="style" className="space-y-4 mt-4">
+              <div>
+                <Label>Dot Style</Label>
+                <Select
+                  value={config.dotStyle}
+                  onValueChange={(value: "square" | "circle" | "rounded") => 
+                    onConfigChange({ ...config, dotStyle: value })
+                  }
+                >
+                  <SelectTrigger>
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="square">Square</SelectItem>
+                    <SelectItem value="circle">Circle</SelectItem>
+                    <SelectItem value="rounded">Rounded</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+
+              <div>
+                <Label>Eye Style</Label>
+                <Select
+                  value={config.eyeStyle}
+                  onValueChange={(value: "square" | "circle" | "rounded") => 
+                    onConfigChange({ ...config, eyeStyle: value })
+                  }
+                >
+                  <SelectTrigger>
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="square">Square</SelectItem>
+                    <SelectItem value="circle">Circle</SelectItem>
+                    <SelectItem value="rounded">Rounded</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+
+              <div>
+                <Label>Corner Radius: {config.cornerRadius}px</Label>
+                <Slider
+                  value={[config.cornerRadius]}
+                  onValueChange={([value]) => onConfigChange({ ...config, cornerRadius: value })}
+                  min={0}
+                  max={20}
+                  step={1}
+                  className="mt-2"
+                />
+              </div>
+
+              <div>
+                <Label>Margin: {config.margin}px</Label>
+                <Slider
+                  value={[config.margin]}
+                  onValueChange={([value]) => onConfigChange({ ...config, margin: value })}
+                  min={0}
+                  max={10}
+                  step={1}
+                  className="mt-2"
+                />
+              </div>
             </TabsContent>
             
             <TabsContent value="logo" className="space-y-4 mt-4">

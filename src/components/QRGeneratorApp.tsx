@@ -29,7 +29,11 @@ export const QRGeneratorApp = () => {
     logo: null,
     logoSize: 20,
     label: "",
-    errorCorrectionLevel: "M"
+    errorCorrectionLevel: "M",
+    margin: 2,
+    cornerRadius: 0,
+    dotStyle: "square",
+    eyeStyle: "square"
   });
 
   const [qrDataUrl, setQrDataUrl] = useState<string>("");

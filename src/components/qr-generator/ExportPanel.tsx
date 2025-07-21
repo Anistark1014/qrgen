@@ -128,13 +128,6 @@ export const ExportPanel = ({ qrDataUrl, config, onExport }: ExportPanelProps) =
           </div>
         </div>
 
-        {/* Batch Export (Coming Soon) */}
-        <div className="p-3 bg-muted/10 rounded-lg border border-border/30">
-          <div className="flex items-center space-x-2 text-sm text-muted-foreground">
-            <Package className="h-4 w-4" />
-            <span>Batch processing and CSV import coming soon...</span>
-          </div>
-        </div>
 
         {/* Export Settings */}
         <div className="text-xs space-y-1 text-muted-foreground">

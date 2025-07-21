@@ -21,6 +21,10 @@ export interface QRConfig {
   logoSize: number;
   label: string;
   errorCorrectionLevel: "L" | "M" | "Q" | "H";
+  margin: number;
+  cornerRadius: number;
+  dotStyle: "square" | "circle" | "rounded";
+  eyeStyle: "square" | "circle" | "rounded";
 }
 
 export interface QRHistoryItem {

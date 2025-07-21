@@ -5,8 +5,7 @@ export const generateQRCode = async (config: QRConfig): Promise<string> => {
   const options: QRCode.QRCodeToDataURLOptions = {
     errorCorrectionLevel: config.errorCorrectionLevel,
     type: "image/png",
-    quality: 1,
-    margin: 2,
+    margin: config.margin || 2,
     width: config.size,
     color: {
       dark: config.useGradient ? "#000000" : config.foregroundColor,
