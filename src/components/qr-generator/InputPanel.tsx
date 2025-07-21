@@ -38,7 +38,6 @@ export const InputPanel = ({ config, onConfigChange }: InputPanelProps) => {
     { value: "text", label: "Plain Text", icon: FileText },
     { value: "email", label: "Email", icon: Mail },
     { value: "phone", label: "Phone Number", icon: Phone },
-    { value: "sms", label: "SMS Message", icon: MessageSquare },
     { value: "wifi", label: "Wi-Fi", icon: Wifi },
     { value: "vcard", label: "vCard", icon: User },
   ];
@@ -255,7 +254,6 @@ END:VCARD`,
                 {config.inputType === "text" && "Text Content"}
                 {config.inputType === "email" && "Email Address"}
                 {config.inputType === "phone" && "Phone Number"}
-                {config.inputType === "sms" && "SMS Message"}
               </Label>
               {config.inputType === "text" || config.inputType === "sms" ? (
                 <Textarea
